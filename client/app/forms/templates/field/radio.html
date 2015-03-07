@@ -1,0 +1,13 @@
+<br>
+<div class="row">
+    <div class="col-sm-2"><h4>{{field.field_title}} :</h4></div>
+    <span class="required-error" ng-show="field.field_required && !field.field_value">* required</span>
+    <div class="col-sm-3">
+        <div ng-repeat="option in field.field_options" class="row-fluid">
+            <label>
+                <input type="radio" value="{{option.option_id}}" ng-model="field.field_value"  ng-required="field.field_required" ng-disabled="field.field_disabled"/>
+                &nbsp;<span ng-bind="option.option_title"></span>
+            </label>
+        </div>
+    </div>
+</div>

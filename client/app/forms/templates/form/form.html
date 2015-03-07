@@ -1,0 +1,41 @@
+<div class="text-center">
+    <h2><u>{{ form.form_name }}</u></h2>
+</div>
+
+<div ng-show="!form.submitted">
+<!--     <div class="row">
+        <div class="text-center">
+            <h4>Form ID: <span class="text-muted">{{ form.form_id }}</span></h4>
+        </div>
+    </div>
+ -->
+     <form name="myForm" id="myForm">
+        <div class="row" ng-repeat="field in form.form_fields">
+            <div class="container">
+                <field-directive field="field">
+
+                </field-directive>
+            </div>
+        </div>
+    </form>
+    <br>
+    <div>
+        <p class="text-center">
+            <button class="btn btn-success" type="button" ng-disabled="!myForm.$valid" ng-click="submit()"><span class="glyphicon glyphicon-edit"></span> Submit Form</button>
+<!--             <button class="btn btn-danger" type="button" ng-click="cancel()"><span class="glyphicon glyphicon-trash"></span> Cancel</button>
+ -->
+        </p>
+    </div>
+</div>
+
+<!-- <div ng-show="form.submitted"> -->
+<!-- <div>
+    <h3>Submitted Data</h3>
+    <div ng-repeat="field in form.form_fields">
+        Field Title: {{ field.field_title }} <br>
+        Field Type: {{ field.field_type }} <br>
+        Field Value: {{ field.field_value }} <br><br>
+    </div>
+    Form Id: {{ form._id }}
+</div>
+ -->

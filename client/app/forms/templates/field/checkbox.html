@@ -1,0 +1,18 @@
+<br>
+<!--
+<input ng-model="field.field_value" id="{{field.field_id}}" type="checkbox" ng-true-value="1" ng-false-value="0" ng-required="field.field_required" ng-disabled="field.field_disabled"/>
+<label class="form-field-label" for="{{field.field_id}}" ng-cloak>{{field.field_title}}</label>
+<span class="required-error" ng-show="field.field_required && field.field_value == 0">(* required)</span>
+-->
+<div class="row">
+    <div class="col-sm-2"><h4>{{field.field_title}} :</h4></div>
+    <span class="required-error" ng-show="field.field_required && !field.field_value">* required</span>
+    <div class="col-sm-3 checkbox">
+        <div ng-repeat="option in field.field_options" class="row-fluid">
+        	<label>
+        	    <input type="checkbox" id="{{field.field_id}}" ng-true-value="1" ng-false-value="0" value="{{option.option_value}}" ng-required="field.field_required" ng-disabled="field.field_disabled"/>
+            	&nbsp;<span ng-bind="option.option_title"></span>
+        	</label>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container-fluid">
+    <div class="row" ng-hide="updated">
+        <div class="col-sm-12 text-center">
+            <h4><u>Choose your preference and click 'save' button</u></h4> <br>
+        </div>
+    </div>    
+    <div class="row" ng-show="updated">
+        <div class="col-sm-12 text-center">
+            <h4>You have applied for "{{applying.name}}"</h4> 
+            <br>
+        </div>
+    </div>    
+    <div class="row" ng-hide="updated">
+        <div class="col-sm-offset-4 col-sm-3">
+            <select class="form-control" ng-model="applying" ng-options="type.name for type in options track by type.value"></select>
+        </div>    
+        <div class="col-sm-3">
+        	<button type="button" class="btn btn-success" ng-click="updateUser()">Save</button>	
+        </div>
+    </div>    
+
+<!-- to show gen alerts -->
+    <div class="row">
+    	<div class="col-sm-offset-4 col-sm-4 text-center">
+   			<alert ng-click="emptyAlerts()" ng-show="message.type && message.msg" type="{{message.type}}">
+   				{{ message.msg }}
+   			</alert>
+   		</div>
+   	</div>
+<!-- to show gen alerts -->
+    <tabset>
+        <tab heading="Fill Application">
+	    	<br>
+	    	<div class="container-fluid" ng-hide="form._id || updated">
+	    		<alert type="danger" class="text-center">
+	    			<h4>Choose your preference first</h4>
+	    		</alert>
+	    	</div>
+
+	    	<div class="container-fluid" ng-show="updated">
+	    		<!-- if there is no form fetched for that particular department -->
+	    		<div ng-hide="formPresent">
+	    			<alert class="text-center">
+	    				<h4>Seems that your application is still not ready !</h4>
+	    				<h4>Please come back later</h4>
+	    			</alert>
+				</div>
+
+	    		<!-- showing form only if there is a form for the particular department -->
+	    		<div class="col-sm-6">
+	    			<div ng-show="formPresent">
+	    				<alert type="info" class="text-center">
+	    					<h4>Fill (or) Update your Application</h4>
+	    				</alert>
+	    		
+	    				<!-- displaying the form -->
+						<form-directive form="form"></form-directive>
+					</div>
+				</div>
+
+		    	<div class="col-sm-6 text-center">
+		    		<h1><u>Your latest response</u></h1>
+			    	<br>
+			    	<!-- <pre>{{formResponses | json}}</pre> -->
+			    	<div ng-hide="formResponses" class="row text-center">
+			    		<alert type="danger">You haven't submitted your response yet</alert>
+			    	</div>
+			    	<div ng-show="formResponses" ng-repeat="each in formResponses.values">
+			    		<div class="row">
+			    			<div class="col-sm-6">
+				    			<h4>{{each.field_title}} :</h4>
+			    			</div>
+			    			<div class="col-sm-6" ng-if="each.field_type === 'dropdown'">
+			    				<div ng-repeat="option in each.field_options">
+			    					<input class="form-control" type="text" ng-if="each.field_value == option.option_id" ng-model="option.option_title" disabled>
+			    				</div>
+			    			</div>
+			    			<div class="col-sm-6" ng-if="each.field_type === 'radio'">
+			    				<div ng-repeat="option in each.field_options">
+			    					<input class="form-control" type="text" ng-if="each.field_value == option.option_id" ng-model="option.option_title" disabled>
+			    				</div>
+			    			</div>
+			    			<div class="col-sm-6" ng-if="each.field_type != 'dropdown' && each.field_type != 'radio'">
+			    				<input class="form-control" type="text" ng-model="each.field_value" disabled>
+			    			</div>
+			    		</div>
+			    	</div>
+		    	</div>
+	    	</div>
+    	</tab>
+    </tabset>
+</div>
+
+<footer class="footer">
+  	<div class="container">
+    	<p>
+	      	<a href="http://www.shaastra.org">Shaastra 2015</a> |
+	        <a href="https://twitter.com/ShaastraIITM">Twitter</a> |
+	        <a href="https://www.facebook.com/Shaastra?ref=br_tf">Facebook</a>
+	    </p>
+	</div>
+</footer>

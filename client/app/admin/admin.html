@@ -1,0 +1,86 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<!-- <div class="container">
+  <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="user in users">
+        <strong>{{user.name}}</strong><br>
+        <span class="text-muted">{{user.email}}</span>
+        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+    </li>
+  </ul>
+</div> -->
+
+<div class="container-fluid">
+	<div>
+		<tabset justified="true">
+			<tab heading="Panel">
+				<br>
+				<alert ng-click="closeAlert()" ng-show="message.type && message.msg" type="{{message.type}}">
+					{{message.msg}}
+				</alert>
+				<h2>List of all forms existing</h2>
+				<br>
+				<div class="container-fluid">
+					<ol class="list-group">
+						<li class="list-group-item" ng-repeat="form in allForms">	
+							[{{$index + 1}}] &nbsp;						
+							<a href="/forms/view/{{form._id}}">{{form.form_name}}</a>
+							<span> [Category: {{form.form_category[0].name}}]</span>
+						</li>
+					</ol>
+				</div>
+			</tab>
+			<tab heading="Responses">
+				<div>
+					<!-- to show gen alerts -->
+					<br>
+				   	<div ng-hide="formResponses" class="row text-center">
+				   		<alert type="danger">There are no responses yet</alert>
+				   	</div>
+
+					<tabset>
+						<tab ng-repeat="option in options" select="changeTo(option.value)" heading="{{option.name}}">
+							<br>
+							<div ng-repeat="response in formResponses">
+
+								<accordion close-others="true">
+									<accordion-group is-open="status.open">
+										<accordion-heading>
+											[{{$index + 1}}] &nbsp; {{response.userName}}
+											<span class="glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></span>
+										</accordion-heading>
+										<h4><u>Username</u> : <span class="text-muted">{{response.userName}}</span></h4>
+										<h4><u>EmailID</u> : <span class="text-muted">{{response.userEmail}}</span></h4>
+										<button class="btn btn-primary" ng-click="open_pdf('open', response, option.name)"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;OpenAs .pdf</button>
+										<button class="btn btn-success" ng-click="open_pdf('download', response, option.name)"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;SaveAs .pdf</button>
+										<div class="container-fluid" ng-repeat="each in response.values">
+								    		<div class="row">
+								    			<div class="col-sm-2">
+									    			<h4>{{each.field_title}} :</h4>
+								    			</div>
+								    			<div class="col-sm-10" ng-if="each.field_type === 'dropdown'">
+								    				<div ng-repeat="option in each.field_options">
+								    					<input class="form-control" type="text" ng-if="each.field_value == option.option_id" ng-model="option.option_title" disabled>
+								    				</div>
+								    			</div>
+								    			<div class="col-sm-10" ng-if="each.field_type === 'radio'">
+								    				<div ng-repeat="option in each.field_options">
+								    					<input class="form-control" type="text" ng-if="each.field_value == option.option_id" ng-model="option.option_title" disabled>
+								    				</div>
+								    			</div>
+								    			<div class="col-sm-10" ng-if="each.field_type != 'dropdown' && each.field_type != 'radio'">
+								    				<input class="form-control" type="text" ng-model="each.field_value" disabled>
+								    			</div>
+								    		</div>
+										</div>
+									</accordion-group>
+								</accordion>
+							</div>
+						</tab>
+					</tabset>	
+				</div>
+			</tab>
+		</tabset>
+	</div>
+</div>

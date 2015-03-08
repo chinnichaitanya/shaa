@@ -5,7 +5,7 @@ angular.module('shaastraApp')
     return {
         controller: function($scope) {
             $scope.submit = function() {
-                $scope.form.form_fields_submitted = []
+                $scope.form.form_fields_submitted = [];
 
                 $scope.form.form_fields_submitted = $scope.form.form_fields;
                 $scope.form.form_id_submitted = $scope.form._id;

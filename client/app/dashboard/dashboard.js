@@ -10,7 +10,7 @@ angular.module('shaastraApp')
         data: {
         	permissions: {
         		except: ['anonymous'],
-        		redirectTo: 'login'
+        		redirectTo: 'dashboard'
         	}
         }        
       });

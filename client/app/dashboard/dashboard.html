@@ -40,16 +40,16 @@
 	    	</div>
 
 	    	<div class="container-fluid" ng-show="updated">
-	    		<!-- if there is no form fetched for that particular department -->
-	    		<div ng-hide="formPresent">
-	    			<alert class="text-center">
-	    				<h4>Seems that your application is still not ready !</h4>
-	    				<h4>Please come back later</h4>
-	    			</alert>
-				</div>
-
 	    		<!-- showing form only if there is a form for the particular department -->
 	    		<div class="col-sm-6">
+		    		<!-- if there is no form fetched for that particular department -->
+		    		<div ng-hide="formPresent">
+		    			<alert class="text-center">
+		    				<h4>Seems that your application is still not ready !</h4>
+		    				<h4>Please come back later</h4>
+		    			</alert>
+					</div>
+
 	    			<div ng-show="formPresent">
 	    				<alert type="info" class="text-center">
 	    					<h4>Fill (or) Update your Application</h4>

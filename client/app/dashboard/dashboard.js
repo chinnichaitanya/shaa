@@ -7,11 +7,5 @@ angular.module('shaastraApp')
         url: '/dashboard',
         templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardCtrl',
-        data: {
-        	permissions: {
-        		except: ['anonymous'],
-        		redirectTo: 'dashboard'
-        	}
-        }        
       });
   });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('shaastraApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, FormService, DashService, socket) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, FormService, DashService) {
 
     // // Use the User $resource to fetch all users
     // $scope.users = User.query();

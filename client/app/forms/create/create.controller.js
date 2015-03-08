@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('shaastraApp')
-  .controller('CreateCtrl', function ($scope, DashService,FormService, $http) {
+  .controller('CreateCtrl', function ($scope, DashService, FormService, $http) {
 
     // messages for alerting purpose
     $scope.message = '';

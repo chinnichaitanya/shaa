@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/shaastra-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };

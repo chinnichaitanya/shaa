@@ -126,34 +126,41 @@ exports.submitForm = function(req, res) {
 			if(true) {
 				var len = form.form_responses.length;
 				var old_user = false;
+				var userFound = -1;
 				for(var i=0; i<len; i++) {
-					if(form.form_responses[i].userId.equals(req.user._id)) {					 
-						form.form_responses[i].values = req.body.formValues;
-						form.form_responses[i].responseUpdatedOn = Date.now();
-
-						form.updated_on = Date.now();
-
-						form.markModified('updated_on');
-						form.markModified('form_responses');
-
-						form.save(function(err) {
-							if(err) console.log(err);
-						});
-				
-						old_user = true;
+					if(form.form_responses[i].userId.equals(req.user._id)) {		
+						userFound = i;			 
 					}
+				}
+
+				if(userFound >= 0) {
+					form.form_responses[userFound].values = req.body.formValues;
+					form.form_responses[userFound].responseUpdatedOn = Date.now();
+
+					form.updated_on = Date.now();
+
+					form.markModified('updated_on');
+					form.markModified('form_responses');
+
+					form.save(function(err) {
+						if(err) console.log(err);
+					});
+			
+					old_user = true;
+				} else {
+					console.log('no user found');
 				}
 				
 				if(old_user === true) {
 					return res.send('Updated successfully');
 				} else {
 					var fVal = {}
-					fVal['values'] = req.body.formValues;
-					fVal['userId'] = req.user._id;
-					fVal['userName'] = req.user.name;
-					fVal['userEmail'] = req.user.email;
-					fVal['responseCreatedOn'] = Date.now();
-					fVal['responseUpdatedOn'] = Date.now();
+					fVal.values = req.body.formValues;
+					fVal.userId = req.user._id;
+					fVal.userName = req.user.name;
+					fVal.userEmail = req.user.email;
+					fVal.responseCreatedOn = Date.now();
+					fVal.responseUpdatedOn = Date.now();
 
 					form.form_responses.push(fVal);
 

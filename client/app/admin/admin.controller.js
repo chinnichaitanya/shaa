@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('shaastraApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, FormService, DashService, socket) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, FormService, DashService) {
 
     // // Use the User $resource to fetch all users
     // $scope.users = User.query();
@@ -23,7 +23,6 @@ angular.module('shaastraApp')
     FormService.formById(0).then(function(responses) {
       if(responses.length != 0) {
         $scope.allForms = responses;
-        // socket.syncUpdates('form', $scope.allForms);
       } else {
         $scope.allForms = '';
       }
@@ -158,7 +157,6 @@ angular.module('shaastraApp')
 
     // $scope.$on('$destroy', function () {
     //   console.log('tee');
-    //   socket.unsyncUpdates('form');
     // });    
 
   });
